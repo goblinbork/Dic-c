@@ -3,23 +3,9 @@
    Trim 170 × 240 mm. Text block 118 × 192 mm. Two inks: black + cinnabar.
    ===================================================================== */
 
-:root {
-  --ink: #000000;          /* black plate */
-  --spot: #B3261E;         /* cinnabar spot plate (≈ Pantone 1805 C) */
-  --spot-30: #E8B9B4;      /* 30 % tint of the spot, for rules and grids */
-  --spot-12: #F6E3E0;      /* 12 % tint */
-  --grey: #6b6b6b;         /* 60 % black, notes */
-  --paper: #ffffff;
+/* variables live in theme.css */
 
-  --text: "EB Garamond", "Bitstream Charter", Georgia, serif;
-  --display: "Instrument Serif", "EB Garamond", serif;
-  --sans: "Instrument Sans", "Inter", Helvetica, Arial, sans-serif;
-
-  --body-size: 11pt;
-  --leading: 16pt;
-}
-
-body[data-variant="screen"] { --paper: #FBF8F1; }
+body[data-variant="screen"] { --paper: var(--paper-screen); }
 
 /* ---------- page geometry ---------- */
 @page {
@@ -51,6 +37,12 @@ body[data-variant="screen"] { --paper: #FBF8F1; }
   @top-left { content: none; } @top-right { content: none; }
   @bottom-left { content: none; } @bottom-right { content: none; }
 }
+/* Consecutive sections that share a named page can lose their break-before in
+   Paged.js; each back-matter section therefore gets its own page name. */
+@page vocab { @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+@page acks { @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+@page colophon { @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+@page yearplan { @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
 
 /* margin-box styling (Paged.js renders margin boxes as flex cells) */
 .pagedjs_margin-content {
@@ -73,7 +65,7 @@ body {
   margin: 0;
   font-family: var(--text);
   font-size: var(--body-size);
-  font-weight: 470;
+  font-weight: var(--text-weight);
   line-height: var(--leading);
   color: var(--ink);
   font-kerning: normal;
@@ -140,6 +132,44 @@ blockquote .who { display: block; margin-top: 8pt; font-family: var(--sans); fon
 .contents li .pg::after { content: target-counter(attr(href url), page); }
 .contents li.plain { grid-template-columns: 1fr auto; }
 
+/* a test, first */
+.testpage { break-before: page; }
+.testpage h1 { font-family: var(--display); font-weight: 400; font-size: 22pt; margin: 0 0 10pt; }
+.testpage p { text-indent: 0; text-align: left; margin-bottom: 8pt; }
+.testpage .rule { border-bottom: 0.35pt solid var(--ink); height: 9mm; font-family: var(--sans); font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); display: flex; align-items: flex-end; padding-bottom: 2pt; margin-bottom: 1mm; }
+.testpage .date { margin-top: 12pt; font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); }
+.testpage .date span { display: inline-block; width: 30mm; border-bottom: 0.35pt solid var(--ink); margin-left: 2mm; }
+
+/* the year (plan) */
+.yearplan { break-before: left; page: yearplan; }
+.yearplan h1 { font-family: var(--display); font-weight: 400; font-size: 22pt; margin: 0 0 6pt; }
+.yearplan p.lead { text-indent: 0; text-align: left; font-size: 10.5pt; line-height: 14pt; margin-bottom: 8pt; }
+.yearplan table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 6.8pt; line-height: 9pt; }
+.yearplan th { text-align: left; font-weight: 600; font-size: 6.5pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--spot); border-bottom: 0.6pt solid var(--spot); padding: 2pt 3pt 3pt 0; }
+.yearplan td { padding: 1.8pt 3pt 1.8pt 0; border-bottom: 0.3pt solid var(--spot-30); vertical-align: top; }
+.yearplan td.n { font-family: var(--display); font-size: 10pt; color: var(--spot); }
+.yearplan td.name { font-family: var(--text); font-size: 9.5pt; }
+.yearplan td.blank { min-width: 14mm; }
+.yearplan .q { margin-top: 8pt; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+.yearplan .q div { border-bottom: 0.35pt solid var(--ink); height: 8mm; font-family: var(--sans); font-size: 6.5pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); }
+.yearplan .end { margin-top: 7pt; font-size: 9.5pt; line-height: 12.5pt; text-indent: 0; text-align: left; }
+
+/* the vocabulary */
+.glossary { break-before: page; page: vocab; }
+.glossary h1 { font-family: var(--display); font-weight: 400; font-size: 20pt; margin: 0 0 4pt; }
+.glossary p.lead { text-indent: 0; text-align: left; font-size: 9pt; line-height: 12pt; margin-bottom: 6pt; }
+.glossary .cols { display: flex; gap: 6mm; break-inside: avoid; }
+.glossary .cols dl { flex: 1 1 0; min-width: 0; }
+.glossary dl { margin: 0; }
+.glossary dt { font-family: var(--sans); font-weight: 600; font-size: 6.2pt; line-height: 8.5pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--spot); }
+.glossary dt span { color: var(--grey); font-weight: 500; letter-spacing: 0.06em; margin-left: 1mm; }
+.glossary dd { margin: 0.5pt 0 2.4pt; font-size: 7.5pt; line-height: 9.5pt; }
+
+/* acknowledgments */
+.acks { break-before: right; page: acks; }
+.acks h1 { font-family: var(--display); font-weight: 400; font-size: 22pt; margin: 0 0 10pt; }
+.acks p { font-size: 10.25pt; line-height: 14.5pt; text-align: left; text-indent: 0; margin-bottom: 7pt; }
+
 /* the set */
 .theset { break-before: right; }
 .theset h1 { font-family: var(--display); font-weight: 400; font-size: 22pt; margin: 0 0 10pt; }
@@ -164,12 +194,19 @@ blockquote .who { display: block; margin-top: 8pt; font-family: var(--sans); fon
 
 .opener { page: opener; height: 192mm; display: flex; flex-direction: column; position: relative; }
 .opener .kicker { font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); margin-top: 2mm; }
-.opener .numeral { font-family: var(--display); font-size: 170pt; line-height: 0.86; color: var(--spot); margin: 14mm 0 0 -4pt; letter-spacing: -0.02em; }
-.opener h1 { font-family: var(--display); font-weight: 400; font-size: 40pt; line-height: 1.02; margin: 10mm 0 0; letter-spacing: -0.005em; }
-.opener .axiom { font-family: var(--text); font-style: italic; font-size: 15.5pt; line-height: 21pt; margin: 8mm 0 0; max-width: 92mm; text-align: left; }
-.opener .epi { margin-top: auto; padding-top: 8mm; font-family: var(--text); font-style: italic; font-size: 10.5pt; line-height: 14pt; text-align: left; text-indent: 0; max-width: 96mm; }
+.opener .numeral { font-family: var(--display); font-size: 120pt; line-height: 0.86; color: var(--spot); margin: 5mm 0 0 -3pt; letter-spacing: -0.02em; }
+.opener h1 { font-family: var(--display); font-weight: 400; font-size: 34pt; line-height: 1.02; margin: 4.5mm 0 0; letter-spacing: -0.005em; }
+.opener .axiom { font-family: var(--text); font-style: italic; font-size: 14pt; line-height: 18pt; margin: 4mm 0 0; max-width: 104mm; text-align: left; }
+/* the plate: a technical drawing of the instrument, one per opener */
+.opener .plate { margin: 6mm 0 0; }
+.opener .plate svg { display: block; width: 100mm; height: auto; overflow: visible; }
+.opener .plate svg text { font-family: var(--sans); font-weight: 500; letter-spacing: 0.02em; }
+.opener .plate svg text.cap { letter-spacing: 0.12em; }
+.opener .plate .cap { font-family: var(--sans); font-size: 6.5pt; line-height: 8.8pt; letter-spacing: 0.04em; color: var(--grey); margin: 2mm 0 0; text-indent: 0; text-align: left; max-width: 108mm; }
+.opener .plate .cap b { font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--spot); margin-right: 1.5mm; }
+.opener .epi { margin-top: auto; padding-top: 3mm; font-family: var(--text); font-style: italic; font-size: 10pt; line-height: 13pt; text-align: left; text-indent: 0; max-width: 104mm; }
 .opener .epi .who { display: block; margin-top: 3pt; font-family: var(--sans); font-style: normal; font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey); }
-.opener .foot { margin-top: 6mm; font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey); }
+.opener .foot { margin-top: 4mm; font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey); }
 
 .essay { break-before: page; }
 .essay > p:first-of-type::first-line { font-variant-caps: small-caps; letter-spacing: 0.06em; }
@@ -186,6 +223,12 @@ blockquote .who { display: block; margin-top: 8pt; font-family: var(--sans); fon
 .essay li { margin-bottom: 3pt; }
 .essay ol { margin: 4pt 0 8pt; padding-left: 5mm; }
 .essay .note { font-size: 9.5pt; line-height: 13pt; }
+
+/* thought experiment */
+.te { margin: 12pt 0 0; padding: 8pt 0 0; border-top: 0.6pt solid var(--spot); break-inside: avoid; }
+.te b.h { display: block; font-family: var(--sans); font-weight: 600; font-size: 7pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--spot); margin: 0 0 3pt; }
+.te p { font-size: 9.75pt; line-height: 13.5pt; text-indent: 0; text-align: left; }
+.te p i { font-style: italic; }
 
 /* ---------- practice page ---------- */
 .practice { break-before: left; page: practice; }   /* practice on the verso, ledger on the facing recto */
@@ -222,7 +265,8 @@ blockquote .who { display: block; margin-top: 8pt; font-family: var(--sans); fon
 .plainpage { break-before: right; }
 .plainpage h1 { font-family: var(--display); font-weight: 400; font-size: 22pt; margin: 0 0 12pt; }
 .plainpage h2 { font-family: var(--sans); font-size: 7.5pt; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--spot); margin: 14pt 0 4pt; break-after: avoid; }
-.sources p { text-align: left; text-indent: 0; font-size: 9pt; line-height: 12.5pt; margin-bottom: 4pt; }
+.sources p { text-align: left; text-indent: 0; font-size: 8.4pt; line-height: 11.4pt; margin-bottom: 3.5pt; }
+.sources h2 { margin: 9pt 0 3pt; }
 .sources p b { font-weight: 640; }
 
 .axioms { break-before: page; page: silent; height: 192mm; display: flex; flex-direction: column; }
@@ -233,7 +277,7 @@ blockquote .who { display: block; margin-top: 8pt; font-family: var(--sans); fon
 .axioms li .t { font-family: var(--text); font-style: italic; font-size: 12pt; line-height: 15pt; }
 .axioms li .t b { font-style: normal; font-weight: 500; font-variant-caps: small-caps; letter-spacing: 0.06em; margin-right: 1.5mm; }
 
-.colophon { break-before: left; page: silent; font-family: var(--sans); font-size: 8pt; line-height: 12pt; font-weight: 400; height: 192mm; display: flex; flex-direction: column; justify-content: flex-end; }
+.colophon { break-before: left; page: colophon; font-family: var(--sans); font-size: 8pt; line-height: 12pt; font-weight: 400; height: 192mm; display: flex; flex-direction: column; justify-content: flex-end; }
 .colophon h1 { font-family: var(--display); font-weight: 400; font-size: 16pt; margin: 0 0 8pt; }
 .colophon p { text-align: left; text-indent: 0; margin-bottom: 6pt; }
 .colophon .owners { margin-top: 12pt; font-family: var(--text); font-size: 10pt; }

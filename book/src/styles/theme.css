@@ -1,0 +1,38 @@
+/* =====================================================================
+   THE INSTRUMENT — theme
+   Every file (interior, cover, cards, chart, letter) reads its fonts and
+   colours from here. Change a value, run `npm run build`, and the whole
+   set re-renders. To use different typefaces, run
+       npm run fonts -- "Family Name:ital,wght@0,400..700;1,400" …
+   which downloads them into src/fonts and writes fonts.generated.css,
+   then point --text / --display / --sans at the new family names.
+   ===================================================================== */
+@import url("fonts.generated.css");
+
+:root {
+  /* typefaces */
+  --text:    "EB Garamond", "Bitstream Charter", Georgia, serif;   /* running text */
+  --display: "Instrument Serif", "EB Garamond", serif;             /* titles, numerals */
+  --sans:    "Instrument Sans", "Inter", Helvetica, Arial, sans-serif; /* labels, tables, working pages */
+
+  /* type scale (interior) */
+  --body-size: 11pt;
+  --leading: 16pt;
+  --text-weight: 470;      /* EB Garamond is variable 400–800; 470 darkens it slightly for uncoated paper */
+
+  /* inks: the book prints in two colours */
+  --ink: #000000;          /* black plate */
+  --spot: #B3261E;         /* cinnabar spot plate, ≈ Pantone 1805 C */
+  --spot-30: #E8B9B4;      /* 30 % tint */
+  --spot-12: #F6E3E0;      /* 12 % tint */
+  --grey: #6b6b6b;         /* 60 % black, captions and notes */
+  --paper: #ffffff;        /* print: white (the paper supplies the colour) */
+  --paper-screen: #FBF8F1; /* screen proof: Munken Pure Rough, approximately */
+
+  /* the case */
+  --cloth: #1B2233;        /* deep ink-blue book cloth */
+  --cloth-2: #161c2b;
+  --foil: #B87333;         /* copper foil */
+  --foil-hi: #E2A86B;
+  --foil-lo: #8A5326;
+}

@@ -20,7 +20,7 @@ The word *instrument* carries three meanings and the book means all of them: a t
 
 | # | Object | What it does |
 |---|---|---|
-| 1 | **The book** — 170 × 240 mm, 96 pp, two colours (black + cinnabar) on Munken Pure Rough 120 gsm, Smyth-sewn, cloth over boards, copper foil, printed endpapers, two ribbons | Twelve chapters. Each: an opener spread, a three-page essay, a practice page facing a ledger page to write on. Plus the Vow, the Twelve Axioms, Notes & Sources, three ruled pages, the colophon. |
+| 1 | **The book** — 170 × 240 mm, 96 pp, two colours (black + cinnabar) on Munken Pure Rough 120 gsm, Smyth-sewn, cloth over boards, copper foil, printed endpapers, two ribbons | Twelve chapters. Each: an opener with a technical plate, a three-page essay ending in a thought experiment, a practice page facing a ledger page to write on. Plus a self-demonstrating opening test, the Year plan, the conclusion, the Vow, the Twelve Axioms, Notes & Sources, the Vocabulary, Acknowledgments, the colophon. |
 | 2 | **The twelve cards** — A6, letterpress, two colours, cotton stock, plus a title card | Axiom on the front, the practice in brief on the back. Carried for the month. |
 | 3 | **The Weeks Chart** — A2, two-colour litho, map-folded | 4,680 boxes, one per week of a ninety-year life, with the eightieth year marked. Filled in pen in month two. |
 | 4 | **The Needle** — etched brass page-marker, stamped with the copy number | Marks the current month. The one singular object every $250+ edition has. |
@@ -51,6 +51,15 @@ Rendered proofs are in `book/dist/` — start with **`the-instrument.pdf`** (scr
 | — | **The Vow** | | One implementation intention, signed and witnessed, reviewed quarterly. Then the envelope. |
 
 Every chapter follows the same six-page rhythm, so the book teaches its own use: **opener | essay · essay | essay · practice | ledger**. The structure is enforced by the build, not by hand.
+
+## What makes it different from a $20 book
+
+- **Twelve plates.** Every opener carries a technical drawing of the instrument, in hairlines and one spot colour, captioned like a figure in a manual: the two regrets crossing, a habit as a column through the years, the Kelly curve and the survivable fraction, loop length on a log scale, attention residue across a day, the flat part of a compounding curve, the gap between taste and work, the bridge across a structural hole, the deficit you cannot feel. No stock illustration anywhere. They are inline SVG, drawn from the research they cite, and they are the book's visual signature.
+- **Thirty-one named tools.** Governing lines, the column, the tail-end sum, the fifty, the kill criterion, the four failures, the asymmetry sort, three bankrolls, loop length, the loop ratio, the applause trap, the thousand minutes, the room rule, the closure line, the flat part, the compounding audit, the gap, the make/consume ratio, the bridge, collecting refusals, the four, the five, the small turn, and the rest. Each is introduced in an essay, used on a practice page, printed on a card, and defined on the Vocabulary page with credit where it is borrowed. Short words for long arguments.
+- **Twelve thought experiments.** The stranger's eulogy (what would your calendar and bank statements say you loved?), the answered world (if any question could be answered in a second, what would still be scarce?), the saboteur, the thousand lives, the silent year, the invoice, the investor, the impaired judge. Each closes an essay with a scenario, a question and a turn.
+- **A test on page eight.** Before the book begins, the reader is asked to write the three most useful ideas from the last serious book they finished. Most people cannot. The page is dated so that it can be re-taken a year later. The book's claim is tested by the book.
+- **Evidence with its limits stated.** Every figure in the Notes was verified against the primary source; the Notes say what each study does not show; stories are labelled stories; the two most fashionable ideas in the genre are excluded with the meta-analyses that say why.
+- **Unexpected connections.** A Bell Labs betting formula becomes a rule for sizing a life's risks in three bankrolls. A 1935 bomber crash and a 2009 surgical trial become one instrument. A sociologist's finding about job-hunting and a Stanford study of asking strangers for favours combine into a courage practice with a target number of refusals. A sleep-laboratory divergence between measured lapses and self-rated sleepiness becomes the reason the book tells you to decide once, in writing, rather than nightly.
 
 ## Why it is worth $250
 
@@ -127,7 +136,7 @@ book/
 
 ## Status
 
-Done: concept, manuscript (about 25,000 words, every citation fact-checked against primary sources), full typographic design, interior PDF (screen and print-ready with bleed), cover mockup and stamping artwork, the twelve cards, the Weeks Chart, the sealed letter, production specification, unit economics.
+Done: concept, manuscript (about 28,000 words, every citation fact-checked against primary sources), twelve plates, twelve thought experiments, the vocabulary, full typographic design system with a single theme file, interior PDF (screen and print-ready with bleed), cover mockup and stamping artwork, the twelve cards, the Weeks Chart, the sealed letter, production specification, unit economics, and the working documents (CLAUDE.md, DESIGN.md, EDITING.md).
 
 Before it goes to press:
 

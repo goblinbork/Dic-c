@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <title>The Weeks Chart</title>
+<link rel="stylesheet" href="styles/theme.css">
 <link rel="stylesheet" href="styles/fonts.css">
 <style>
   /* A2 portrait, 420 × 594 mm, two colours, map-folded to A5. */
-  :root { --spot: #B3261E; --spot-30: #E8B9B4; --ink: #000; }
-  @page { size: 420mm 594mm; margin: 0; }
+    @page { size: 420mm 594mm; margin: 0; }
   html, body { margin: 0; padding: 0; }
-  body { font-family: "EB Garamond", serif; color: var(--ink); background: #888; }
+  body { font-family: var(--text); color: var(--ink); background: #888; }
   .sheet { width: 420mm; height: 594mm; background: #fff; position: relative; overflow: hidden; }
   .head { position: absolute; left: 24mm; right: 24mm; top: 20mm; height: 40mm; }
-  .head h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 44pt; line-height: 1; margin: 0; letter-spacing: 0.01em; }
+  .head h1 { font-family: var(--display); font-weight: 400; font-size: 44pt; line-height: 1; margin: 0; letter-spacing: 0.01em; }
   .head .sub { font-style: italic; font-size: 15pt; margin-top: 3mm; }
-  .head .right { position: absolute; right: 0; top: 2mm; width: 150mm; font-family: "Instrument Sans", sans-serif; font-size: 8pt; line-height: 12pt; letter-spacing: 0.04em; }
+  .head .right { position: absolute; right: 0; top: 2mm; width: 150mm; font-family: var(--sans); font-size: 8pt; line-height: 12pt; letter-spacing: 0.04em; }
   .head .right b { display: block; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; font-size: 7pt; color: var(--spot); margin-bottom: 1.5mm; }
   .head .right .f { display: inline-block; border-bottom: 0.35pt solid #000; width: 22mm; margin: 0 2mm; }
   svg.grid { position: absolute; left: 24mm; top: 66mm; }
-  .foot { position: absolute; left: 24mm; right: 24mm; bottom: 14mm; font-family: "Instrument Sans", sans-serif; font-size: 7pt; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6b6b; display: flex; justify-content: space-between; }
+  .foot { position: absolute; left: 24mm; right: 24mm; bottom: 14mm; font-family: var(--sans); font-size: 7pt; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6b6b; display: flex; justify-content: space-between; }
   @media screen { body { padding: 10mm; } }
 </style>
 <script>
@@ -26,7 +26,7 @@
     const cols = 52, rows = 90, pitch = 5.6, box = 4.8, left = 14, top = 10; // mm
     const W = left + cols * pitch + 2, H = top + rows * pitch + 2;
     let s = `<svg class="grid" xmlns="http://www.w3.org/2000/svg" width="${W}mm" height="${H}mm" viewBox="0 0 ${W} ${H}">`;
-    s += `<style>text{font-family:"Instrument Sans",sans-serif;font-size:2.4px;fill:#6b6b6b;letter-spacing:.08px} .eighty{font-family:"Instrument Serif",serif;font-size:3.6px;fill:#B3261E;letter-spacing:0}</style>`;
+    s += `<style>text{font-family:var(--sans);font-size:2.4px;fill:#6b6b6b;letter-spacing:.08px} .eighty{font-family:var(--display);font-size:3.6px;fill:var(--spot);letter-spacing:0}</style>`;
     // week labels along the top
     for (let c = 0; c < cols; c++) {
       const w = c + 1;
@@ -44,7 +44,7 @@
     }
     // the line at eighty
     const y80 = top + 80 * pitch - (pitch - box) / 2;
-    s += `<line x1="${left - 1}" y1="${y80}" x2="${left + cols * pitch}" y2="${y80}" stroke="#B3261E" stroke-width="0.5" stroke-dasharray="1.2 1.2"/>`;
+    s += `<line x1="${left - 1}" y1="${y80}" x2="${left + cols * pitch}" y2="${y80}" stroke="var(--spot)" stroke-width="0.5" stroke-dasharray="1.2 1.2"/>`;
     s += `<text class="eighty" x="${left + cols * pitch + 1.5}" y="${y80 + 1.2}" text-anchor="start">eighty</text>`;
     s += `<text x="${left - 3}" y="${top - 6.5}" text-anchor="end" style="letter-spacing:.4px">AGE ↓</text>`;
     s += `</svg>`;

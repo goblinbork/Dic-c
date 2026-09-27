@@ -146,6 +146,7 @@ async function render(browser, target) {
     const dest = path.join(DIST, out.file);
     await page.pdf({ path: dest, printBackground: true, preferCSSPageSize: true });
     console.log(`  ${out.file}${pages ? `  (${pages} pages)` : ''}`);
+    if (t.parts && out === t.outputs[0]) await pageMap(page);
     if (t.png && out === t.outputs[0]) {
       const el = await page.$(t.png.selector);
       if (el) {
@@ -155,6 +156,32 @@ async function render(browser, target) {
     }
     await page.close();
   }
+}
+
+// ---------------------------------------------------------------------------
+// Page map: reads the paginated DOM and reports what landed on each page, so a
+// chapter that drifts off its six-page rhythm (opener | essay · essay | essay ·
+// practice | ledger) shows up immediately as a blank or a misplaced page.
+// ---------------------------------------------------------------------------
+async function pageMap(page) {
+  const rows = await page.evaluate(() => {
+    const kinds = [['.opener', 'OPENER'], ['.practice', 'practice'], ['.ledger', 'ledger'], ['.half-title', 'half-title'], ['.title-page', 'title'], ['.copyright', 'copyright'], ['.dedication', 'dedication'], ['.epigraph-page', 'epigraph'], ['.contents', 'contents'], ['.testpage', 'test'], ['.howto', 'before you begin'], ['.theset', 'the set'], ['.yearplan', 'the year'], ['.after', 'after the year'], ['.vowtext', 'vow (text)'], ['.vow', 'vow (form)'], ['.axioms', 'axioms'], ['.sources', 'sources'], ['.glossary', 'vocabulary'], ['.acks', 'acknowledgments'], ['.colophon', 'colophon'], ['.essay', 'essay']];
+    return Array.from(document.querySelectorAll('.pagedjs_page')).map((pg, i) => {
+      const area = pg.querySelector('.pagedjs_page_content');
+      const text = (area?.innerText || '').replace(/\s+/g, ' ').trim();
+      let kind = text ? 'text' : 'BLANK';
+      for (const [sel, name] of kinds) { if (area?.querySelector(sel)) { kind = name; break; } }
+      return { n: i + 1, side: (i + 1) % 2 ? 'R' : 'V', kind, head: text.slice(0, 48) };
+    });
+  });
+  const blanks = rows.filter(r => r.kind === 'BLANK').map(r => r.n);
+  console.log('  page map:');
+  for (const r of rows) console.log(`    ${String(r.n).padStart(3)} ${r.side} ${r.kind.padEnd(16)} ${r.head}`);
+  console.log(`  ${rows.length} pages; blank: ${blanks.length ? blanks.join(', ') : 'none'}`);
+  const openers = rows.filter(r => r.kind === 'OPENER');
+  const drift = openers.filter((r, i) => (r.n - openers[0].n) !== i * 6 || r.side !== 'V');
+  if (drift.length) console.log(`  WARNING: chapters off the six-page rhythm at pages ${drift.map(r => r.n).join(', ')}`);
+  if (rows.length % 16) console.log(`  WARNING: ${rows.length} pages is not a multiple of 16 (signatures)`);
 }
 
 async function main() {

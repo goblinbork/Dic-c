@@ -3,28 +3,28 @@
 <head>
 <meta charset="utf-8">
 <title>The Instrument — the sealed letter</title>
+<link rel="stylesheet" href="styles/theme.css">
 <link rel="stylesheet" href="styles/fonts.css">
 <style>
   /* Four A5 pages (148 × 210 mm), printed as one A4 sheet folded once, sealed in a Colorplan envelope. Two colours. */
-  :root { --spot: #B3261E; --ink: #000; }
-  @page { size: 148mm 210mm; margin: 0; }
+    @page { size: 148mm 210mm; margin: 0; }
   html, body { margin: 0; padding: 0; }
-  body { font-family: "EB Garamond", serif; font-weight: 470; color: var(--ink); background: #888; font-size: 11pt; line-height: 16pt; }
+  body { font-family: var(--text); font-weight: 470; color: var(--ink); background: #888; font-size: 11pt; line-height: 16pt; }
   .pg { width: 148mm; height: 210mm; background: #fff; position: relative; overflow: hidden; break-after: page; }
   .in { position: absolute; left: 18mm; right: 18mm; top: 20mm; bottom: 20mm; }
   p { margin: 0; text-align: justify; text-indent: 1.4em; hyphens: manual; }
   p.first, h2 + p { text-indent: 0; }
-  .kicker { font-family: "Instrument Sans", sans-serif; font-weight: 500; font-size: 7pt; letter-spacing: 0.18em; text-transform: uppercase; }
-  .numeral { font-family: "Instrument Serif", serif; font-size: 120pt; line-height: 0.85; color: var(--spot); margin: 30mm 0 0 -3pt; letter-spacing: -0.02em; }
-  h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 28pt; line-height: 1.05; margin: 8mm 0 0; }
+  .kicker { font-family: var(--sans); font-weight: 500; font-size: 7pt; letter-spacing: 0.18em; text-transform: uppercase; }
+  .numeral { font-family: var(--display); font-size: 120pt; line-height: 0.85; color: var(--spot); margin: 30mm 0 0 -3pt; letter-spacing: -0.02em; }
+  h1 { font-family: var(--display); font-weight: 400; font-size: 28pt; line-height: 1.05; margin: 8mm 0 0; }
   .seal { position: absolute; left: 18mm; right: 18mm; bottom: 20mm; font-style: italic; font-size: 11pt; }
-  h2 { font-family: "Instrument Sans", sans-serif; font-weight: 600; font-size: 7pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--spot); margin: 10pt 0 4pt; }
+  h2 { font-family: var(--sans); font-weight: 600; font-size: 7pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--spot); margin: 10pt 0 4pt; }
   .sc { font-variant-caps: small-caps; letter-spacing: 0.06em; }
   .last { position: absolute; left: 18mm; right: 18mm; top: 20mm; bottom: 20mm; display: flex; flex-direction: column; }
   .last blockquote { margin: auto 0 0; }
   .last blockquote p { text-align: left; text-indent: 0; font-style: italic; font-size: 13pt; line-height: 18pt; }
-  .last blockquote .who { display: block; margin-top: 4pt; font-family: "Instrument Sans", sans-serif; font-style: normal; font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6b6b6b; }
-  .owners { margin-top: 10mm; font-family: "Instrument Sans", sans-serif; font-size: 6.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6b6b; }
+  .last blockquote .who { display: block; margin-top: 4pt; font-family: var(--sans); font-style: normal; font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6b6b6b; }
+  .owners { margin-top: 10mm; font-family: var(--sans); font-size: 6.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6b6b; }
   .owners div { border-bottom: 0.35pt solid #000; height: 8mm; display: flex; align-items: flex-end; padding-bottom: 1pt; margin-bottom: 2mm; }
 </style>
 <script>

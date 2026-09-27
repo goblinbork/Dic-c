@@ -3,29 +3,29 @@
 <head>
 <meta charset="utf-8">
 <title>The Instrument — the twelve cards</title>
+<link rel="stylesheet" href="styles/theme.css">
 <link rel="stylesheet" href="styles/fonts.css">
 <style>
   /* A6 cards (105 × 148 mm) with 3 mm bleed: page 111 × 154 mm. Two colours: black + cinnabar. Letterpress from photopolymer. */
-  :root { --spot: #B3261E; --spot-30: #E8B9B4; --ink: #000; }
-  @page { size: 111mm 154mm; margin: 0; }
+    @page { size: 111mm 154mm; margin: 0; }
   html, body { margin: 0; padding: 0; }
-  body { font-family: "EB Garamond", serif; color: var(--ink); background: #888; }
+  body { font-family: var(--text); color: var(--ink); background: #888; }
   .card { width: 111mm; height: 154mm; background: #fff; position: relative; break-after: page; overflow: hidden; }
   .in { position: absolute; left: 11mm; top: 11mm; right: 11mm; bottom: 11mm; display: flex; flex-direction: column; }
-  .kicker { font-family: "Instrument Sans", sans-serif; font-weight: 500; font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; }
-  .numeral { font-family: "Instrument Serif", serif; font-size: 96pt; line-height: 0.85; color: var(--spot); margin: 8mm 0 0 -2pt; letter-spacing: -0.02em; }
-  h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 26pt; line-height: 1.02; margin: 7mm 0 0; }
+  .kicker { font-family: var(--sans); font-weight: 500; font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; }
+  .numeral { font-family: var(--display); font-size: 96pt; line-height: 0.85; color: var(--spot); margin: 8mm 0 0 -2pt; letter-spacing: -0.02em; }
+  h1 { font-family: var(--display); font-weight: 400; font-size: 26pt; line-height: 1.02; margin: 7mm 0 0; }
   .axiom { font-style: italic; font-size: 12pt; line-height: 15pt; margin: 4mm 0 0; }
-  .foot { margin-top: auto; font-family: "Instrument Sans", sans-serif; font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b6b; display: flex; justify-content: space-between; }
-  .back .label { font-family: "Instrument Sans", sans-serif; font-weight: 600; font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--spot); }
-  .back h2 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 20pt; line-height: 1.05; margin: 2mm 0 4mm; padding-bottom: 3mm; border-bottom: 0.5pt solid var(--spot); }
+  .foot { margin-top: auto; font-family: var(--sans); font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b6b; display: flex; justify-content: space-between; }
+  .back .label { font-family: var(--sans); font-weight: 600; font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--spot); }
+  .back h2 { font-family: var(--display); font-weight: 400; font-size: 20pt; line-height: 1.05; margin: 2mm 0 4mm; padding-bottom: 3mm; border-bottom: 0.5pt solid var(--spot); }
   .back ol { list-style: none; margin: 0; padding: 0; counter-reset: s; }
   .back li { position: relative; padding-left: 8mm; margin-bottom: 3.2mm; font-size: 10.5pt; line-height: 13.5pt; counter-increment: s; }
-  .back li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 0.5pt; font-family: "Instrument Sans", sans-serif; font-weight: 600; font-size: 7pt; color: var(--spot); }
+  .back li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 0.5pt; font-family: var(--sans); font-weight: 600; font-size: 7pt; color: var(--spot); }
   .back li::after { content: ""; position: absolute; left: 4.4mm; top: 2.6pt; width: 2.2mm; height: 2.2mm; border: 0.45pt solid var(--spot); }
   .title .numeral { font-size: 20pt; line-height: 1; margin: 0; }
   .title h1 { font-size: 30pt; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 30mm; }
-  .title .sub { font-family: "Instrument Serif", serif; font-style: italic; font-size: 13pt; margin-top: 3mm; }
+  .title .sub { font-family: var(--display); font-style: italic; font-size: 13pt; margin-top: 3mm; }
   .title svg { width: 22mm; height: 22mm; margin-top: 8mm; }
   .rules li { font-size: 10pt; line-height: 13pt; margin-bottom: 2.6mm; }
   .rules li::after { display: none; }
@@ -49,7 +49,7 @@
   <div class="kicker">Twelve cards &middot; one a month</div>
   <h1>The<br>Instrument</h1>
   <div class="sub">Twelve tools for a life of your own making</div>
-  <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#000" stroke-width="1.4"/><line x1="50" y1="50" x2="67" y2="20.6" stroke="#B3261E" stroke-width="2"/><circle cx="50" cy="50" r="2.4" fill="#B3261E"/></svg>
+  <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#000" stroke-width="1.4"/><line x1="50" y1="50" x2="67" y2="20.6" stroke="var(--spot)" stroke-width="2"/><circle cx="50" cy="50" r="2.4" fill="var(--spot)"/></svg>
   <div class="foot"><span>Limited edition</span><span>One of five hundred</span></div>
 </div></div>
 <div class="card back"><div class="in">
