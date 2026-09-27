@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Instrument — the sealed letter</title>
+<link rel="stylesheet" href="styles/fonts.css">
+<style>
+  /* Four A5 pages (148 × 210 mm), printed as one A4 sheet folded once, sealed in a Colorplan envelope. Two colours. */
+  :root { --spot: #B3261E; --ink: #000; }
+  @page { size: 148mm 210mm; margin: 0; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "EB Garamond", serif; font-weight: 470; color: var(--ink); background: #888; font-size: 11pt; line-height: 16pt; }
+  .pg { width: 148mm; height: 210mm; background: #fff; position: relative; overflow: hidden; break-after: page; }
+  .in { position: absolute; left: 18mm; right: 18mm; top: 20mm; bottom: 20mm; }
+  p { margin: 0; text-align: justify; text-indent: 1.4em; hyphens: manual; }
+  p.first, h2 + p { text-indent: 0; }
+  .kicker { font-family: "Instrument Sans", sans-serif; font-weight: 500; font-size: 7pt; letter-spacing: 0.18em; text-transform: uppercase; }
+  .numeral { font-family: "Instrument Serif", serif; font-size: 120pt; line-height: 0.85; color: var(--spot); margin: 30mm 0 0 -3pt; letter-spacing: -0.02em; }
+  h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 28pt; line-height: 1.05; margin: 8mm 0 0; }
+  .seal { position: absolute; left: 18mm; right: 18mm; bottom: 20mm; font-style: italic; font-size: 11pt; }
+  h2 { font-family: "Instrument Sans", sans-serif; font-weight: 600; font-size: 7pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--spot); margin: 10pt 0 4pt; }
+  .sc { font-variant-caps: small-caps; letter-spacing: 0.06em; }
+  .last { position: absolute; left: 18mm; right: 18mm; top: 20mm; bottom: 20mm; display: flex; flex-direction: column; }
+  .last blockquote { margin: auto 0 0; }
+  .last blockquote p { text-align: left; text-indent: 0; font-style: italic; font-size: 13pt; line-height: 18pt; }
+  .last blockquote .who { display: block; margin-top: 4pt; font-family: "Instrument Sans", sans-serif; font-style: normal; font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6b6b6b; }
+  .owners { margin-top: 10mm; font-family: "Instrument Sans", sans-serif; font-size: 6.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6b6b; }
+  .owners div { border-bottom: 0.35pt solid #000; height: 8mm; display: flex; align-items: flex-end; padding-bottom: 1pt; margin-bottom: 2mm; }
+</style>
+<script>
+  window.addEventListener('load', async () => {
+    try { await Promise.all(Array.from(document.fonts).map(f => f.load())); await document.fonts.ready; } catch (e) {}
+    window.__renderDone = true;
+  });
+</script>
+</head>
+<body>
+
+<div class="pg"><div class="in">
+  <div class="kicker">The Instrument &middot; To be opened after the vow</div>
+  <div class="numeral">XIII</div>
+  <h1>The thirteenth<br>instrument</h1>
+</div><div class="seal">If you have opened this before signing the vow, close it. It will not work yet, and it only works once.</div></div>
+
+<div class="pg"><div class="in">
+  <p class="first"><span class="sc">You have finished,</span> and you have not. Before you read the rest of this page, go back to the first ledger and read the eulogy you wrote a year ago. Read the three governing lines. Then read the twelve pages that follow it in your own hand, and notice which of the twelve are signed <i>kept</i>, and which <i>revised</i>, and whether any are blank. That record is the year. It is more accurate than your memory of it, which is why the book made you write it.</p>
+  <p>Here is what the year was for. It was not for the twelve practices. They were scaffolding. The point was to find out, by using them, which of the twelve are yours, because nobody keeps twelve. Most people keep three, and the three are different for each person, and there is no way to know in advance which they will be. You had to run all of them to find out. Look at the ledgers. The ones you kept without effort, the ones you would now feel strange not doing, are your instruments. The others were rented for a month, and you can give them back with thanks.</p>
+  <p>So there is no thirteenth instrument in this envelope. The thirteenth instrument is the set of three you have just identified, and the vow you signed yesterday, and the fact that you now know what you are like when you are asked to keep a promise to a book. Those are worth more than anything I could have sealed in here, and it seemed dishonest to pretend otherwise.</p>
+  <h2>The second year</h2>
+  <p>Keep the three. Run them without the book, on the same rhythm: read nothing, practise on the first week, review on the last day. Keep the weekly non-negotiable, whatever it has become; it is the vehicle everything else rides in. Keep the decision ledger, and read the entries you made nine months ago. Some of them will make you wince. That is the loop closing, and it is the only way anyone has ever found out what they are actually good at.</p>
+</div></div>
+
+<div class="pg"><div class="in">
+  <p class="first">Open the ten-year letter you wrote in the eighth month and read it against the ledgers. You are one year into the ten. The curve is flat; that is what it looks like from here. Do not interrupt it.</p>
+  <p>Then write the eulogy again. Not because the first one was wrong, but because you are not the person who wrote it, and the new draft will show you the difference, which is the only measure of a year that matters. Take the three governing lines that survive both drafts. Those are not aspirations any more. They are a description, and you may find that a stranger reading them would recognise you.</p>
+  <h2>Passing it on</h2>
+  <p>This copy was made to outlive you. Not this year, perhaps not next, but at some point you will know the person it should go to: someone at the start of something, who would use it rather than shelve it, and who would be a little frightened to receive it. When that happens, write your name and theirs in the colophon, put the needle on the first chapter, reseal nothing, and give it to them with the cards and the chart and this letter. Tell them not to open the envelope early. They will not listen, and it will not matter, because it does not work until the vow is signed, and that part is true.</p>
+  <p>Register the transfer, if you like, so that the book&rsquo;s year can begin again for them on the first of the month. The register will send them the same twelve messages it sent you, and nothing else.</p>
+  <h2>Last</h2>
+  <p>The book began by saying that most books do not work. It has tried to be the exception by refusing to be read, and by insisting, twelve times, that you write instead. Whether it worked is not in the book. It is in the pages you wrote, and in the people who noticed, and in the weeks on the chart that you would now colour a different colour. Thank you for using it. Put it somewhere you will see it.</p>
+</div></div>
+
+<div class="pg"><div class="last">
+  <div class="kicker">The Instrument &middot; One of five hundred</div>
+  <blockquote>
+    <p>Tell me, what is it you plan to do<br>with your one wild and precious life?</p>
+    <p><span class="who">Mary Oliver, &ldquo;The Summer Day&rdquo;, 1990</span></p>
+  </blockquote>
+  <div class="owners"><div>Opened by</div><div>On</div></div>
+</div></div>
+
+</body>
+</html>

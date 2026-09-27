@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Instrument — case wrap</title>
+<link rel="stylesheet" href="styles/fonts.css">
+<style>
+  /* Case wrap for a 170 × 240 mm book, 96 pp on 120 gsm, 3 mm boards.
+     Flat size 406 × 276 mm: 15 turn-in + 173 board + 8 joint + 14 spine + 8 joint + 173 board + 15 turn-in. */
+  :root { --cloth: #1B2233; --cloth-2: #161c2b; --foil: #B87333; --foil-hi: #E2A86B; --foil-lo: #8A5326; --cinnabar: #B3261E; }
+  @page { size: 406mm 276mm; margin: 0; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Instrument Serif", serif; background: #888; }
+  .sheet { width: 406mm; height: 276mm; position: relative; overflow: hidden; break-after: page; }
+  .mock { background: var(--cloth);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.028) 0 0.25mm, transparent 0.25mm 0.6mm),
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.10) 0 0.25mm, transparent 0.25mm 0.6mm); }
+  .turnin { position: absolute; inset: 0; border: 15mm solid rgba(0,0,0,0.06); pointer-events: none; }
+  .panel { position: absolute; top: 15mm; height: 246mm; }
+  .back  { left: 15mm; width: 173mm; }
+  .spine { left: 196mm; width: 14mm; }
+  .front { left: 218mm; width: 173mm; }
+  .joint { position: absolute; top: 15mm; height: 246mm; width: 8mm; background: rgba(0,0,0,0.10); }
+  .joint.l { left: 188mm; } .joint.r { left: 210mm; }
+  .foil { color: var(--foil); background: linear-gradient(160deg, var(--foil-hi) 0%, var(--foil) 45%, var(--foil-lo) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .title { position: absolute; left: 0; right: 0; text-align: center; font-size: 30pt; letter-spacing: 0.22em; text-transform: uppercase; line-height: 1.15; }
+  .front .title { top: 28mm; }
+  .sub { position: absolute; left: 0; right: 0; text-align: center; font-family: "Instrument Sans", sans-serif; font-weight: 500; font-size: 7pt; letter-spacing: 0.28em; text-transform: uppercase; }
+  .front .sub { top: 52mm; }
+  .front .mark { position: absolute; left: 50%; top: 50%; width: 92mm; height: 92mm; transform: translate(-50%, -42%); }
+  .front .mark circle.ring, .front .mark line.tick { stroke: rgba(0,0,0,0.42); }
+  .front .mark .needle { stroke: var(--foil); }
+  .front .ed { position: absolute; left: 0; right: 0; bottom: 26mm; text-align: center; font-family: "Instrument Sans", sans-serif; font-weight: 500; font-size: 7pt; letter-spacing: 0.28em; text-transform: uppercase; }
+  .spine .stitle { position: absolute; top: 24mm; left: 50%; transform: translateX(-50%) rotate(90deg); transform-origin: left top; white-space: nowrap; font-size: 14pt; letter-spacing: 0.22em; text-transform: uppercase; }
+  .spine .smark { position: absolute; bottom: 18mm; left: 50%; transform: translateX(-50%); width: 7mm; height: 7mm; }
+  .back .bmark { position: absolute; left: 50%; bottom: 26mm; transform: translateX(-50%); width: 12mm; height: 12mm; }
+  .back .btxt { position: absolute; left: 30mm; right: 30mm; top: 96mm; text-align: center; font-family: "Instrument Serif", serif; font-style: italic; font-size: 13pt; line-height: 1.5; color: rgba(255,255,255,0.0); }
+  /* stamping artwork sheet */
+  .art { background: #fff; }
+  .art .panel { outline: 0.2mm dashed #999; }
+  .art .foil { color: #000; background: none; -webkit-text-fill-color: #000; }
+  .art .front .mark circle.ring, .art .front .mark line.tick { stroke: #FF00FF; }
+  .art .front .mark .needle { stroke: #000; }
+  .art .spine .stitle, .art .front .ed, .art .front .sub { color: #000; -webkit-text-fill-color: #000; }
+  .art .legend { position: absolute; left: 15mm; bottom: 4mm; font-family: "Instrument Sans", sans-serif; font-size: 7pt; letter-spacing: 0.06em; color: #000; }
+  .art .turnin { border-color: rgba(0,0,0,0.04); }
+  .art .joint { background: rgba(0,0,0,0.04); }
+  /* preview (screen only) */
+  #front-preview { width: 173mm; height: 246mm; position: relative; overflow: hidden; margin: 10mm; box-shadow: 0 14mm 30mm rgba(0,0,0,0.35), inset 0 0 0 0.5mm rgba(255,255,255,0.05); border-radius: 0.8mm 3mm 3mm 0.8mm; }
+  #front-preview .front { left: 0; top: 0; }
+  @media print {
+    #front-preview { display: none; }
+    /* background-clip:text does not survive print; use solid copper on the mockup sheet */
+    .mock .foil { background: none; -webkit-text-fill-color: var(--foil); color: var(--foil); }
+  }
+</style>
+<script>
+  window.addEventListener('load', async () => {
+    try { await Promise.all(Array.from(document.fonts).map(f => f.load())); await document.fonts.ready; } catch (e) {}
+    window.__renderDone = true;
+  });
+</script>
+</head>
+<body>
+
+<!-- Sheet 1: mockup of the finished case (cloth + copper foil) -->
+<div class="sheet mock">
+  <div class="turnin"></div>
+  <div class="joint l"></div><div class="joint r"></div>
+  <div class="panel back">
+    <svg class="bmark" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#B87333" stroke-width="2"/><line x1="50" y1="50" x2="67" y2="20.6" stroke="#B87333" stroke-width="3"/><circle cx="50" cy="50" r="3" fill="#B87333"/></svg>
+  </div>
+  <div class="panel spine">
+    <div class="stitle foil">The Instrument</div>
+    <svg class="smark" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#B87333" stroke-width="3"/><line x1="50" y1="50" x2="67" y2="20.6" stroke="#B87333" stroke-width="4"/></svg>
+  </div>
+  <div class="panel front">
+    <div class="title foil">The<br>Instrument</div>
+    <div class="sub foil">Twelve tools for a life of your own making</div>
+    <svg class="mark" viewBox="0 0 100 100">
+      <circle class="ring" cx="50" cy="50" r="46" fill="none" stroke-width="0.9"/>
+      <g class="ticks" stroke-width="0.9">
+        <line class="tick" x1="50" y1="4" x2="50" y2="12"/><line class="tick" x1="50" y1="88" x2="50" y2="96"/>
+        <line class="tick" x1="4" y1="50" x2="12" y2="50"/><line class="tick" x1="88" y1="50" x2="96" y2="50"/>
+        <line class="tick" x1="27" y1="10.2" x2="30.5" y2="16.3"/><line class="tick" x1="69.5" y1="83.7" x2="73" y2="89.8"/>
+        <line class="tick" x1="10.2" y1="27" x2="16.3" y2="30.5"/><line class="tick" x1="83.7" y1="69.5" x2="89.8" y2="73"/>
+        <line class="tick" x1="10.2" y1="73" x2="16.3" y2="69.5"/><line class="tick" x1="83.7" y1="30.5" x2="89.8" y2="27"/>
+        <line class="tick" x1="27" y1="89.8" x2="30.5" y2="83.7"/><line class="tick" x1="69.5" y1="16.3" x2="73" y2="10.2"/>
+      </g>
+      <line class="needle" x1="50" y1="50" x2="67" y2="20.6" stroke-width="1.4"/>
+      <circle cx="50" cy="50" r="2" fill="#B87333"/>
+    </svg>
+    <div class="ed foil">One of five hundred</div>
+  </div>
+</div>
+
+<!-- Sheet 2: stamping artwork. Black = copper foil (Kurz Luxor or equivalent). Magenta = blind deboss. -->
+<div class="sheet art">
+  <div class="turnin"></div>
+  <div class="joint l"></div><div class="joint r"></div>
+  <div class="panel back">
+    <svg class="bmark" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#000" stroke-width="2"/><line x1="50" y1="50" x2="67" y2="20.6" stroke="#000" stroke-width="3"/><circle cx="50" cy="50" r="3" fill="#000"/></svg>
+  </div>
+  <div class="panel spine">
+    <div class="stitle foil">The Instrument</div>
+    <svg class="smark" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#000" stroke-width="3"/><line x1="50" y1="50" x2="67" y2="20.6" stroke="#000" stroke-width="4"/></svg>
+  </div>
+  <div class="panel front">
+    <div class="title foil">The<br>Instrument</div>
+    <div class="sub foil">Twelve tools for a life of your own making</div>
+    <svg class="mark" viewBox="0 0 100 100">
+      <circle class="ring" cx="50" cy="50" r="46" fill="none" stroke-width="0.9"/>
+      <g class="ticks" stroke-width="0.9">
+        <line class="tick" x1="50" y1="4" x2="50" y2="12"/><line class="tick" x1="50" y1="88" x2="50" y2="96"/>
+        <line class="tick" x1="4" y1="50" x2="12" y2="50"/><line class="tick" x1="88" y1="50" x2="96" y2="50"/>
+        <line class="tick" x1="27" y1="10.2" x2="30.5" y2="16.3"/><line class="tick" x1="69.5" y1="83.7" x2="73" y2="89.8"/>
+        <line class="tick" x1="10.2" y1="27" x2="16.3" y2="30.5"/><line class="tick" x1="83.7" y1="69.5" x2="89.8" y2="73"/>
+        <line class="tick" x1="10.2" y1="73" x2="16.3" y2="69.5"/><line class="tick" x1="83.7" y1="30.5" x2="89.8" y2="27"/>
+        <line class="tick" x1="27" y1="89.8" x2="30.5" y2="83.7"/><line class="tick" x1="69.5" y1="16.3" x2="73" y2="10.2"/>
+      </g>
+      <line class="needle" x1="50" y1="50" x2="67" y2="20.6" stroke-width="1.4"/>
+      <circle cx="50" cy="50" r="2" fill="#000"/>
+    </svg>
+    <div class="ed foil">One of five hundred</div>
+  </div>
+  <div class="legend">STAMPING ARTWORK · flat 406 × 276 mm · black = copper foil · magenta = blind deboss · dashed = board edges · 15 mm turn-ins · spine 14 mm (confirm with binder’s bulk sample)</div>
+</div>
+
+<!-- Screen-only preview of the front board, captured to cover-front.png -->
+<div id="front-preview" class="mock">
+  <div class="panel front">
+    <div class="title foil">The<br>Instrument</div>
+    <div class="sub foil">Twelve tools for a life of your own making</div>
+    <svg class="mark" viewBox="0 0 100 100">
+      <circle class="ring" cx="50" cy="50" r="46" fill="none" stroke-width="0.9"/>
+      <g class="ticks" stroke-width="0.9">
+        <line class="tick" x1="50" y1="4" x2="50" y2="12"/><line class="tick" x1="50" y1="88" x2="50" y2="96"/>
+        <line class="tick" x1="4" y1="50" x2="12" y2="50"/><line class="tick" x1="88" y1="50" x2="96" y2="50"/>
+        <line class="tick" x1="27" y1="10.2" x2="30.5" y2="16.3"/><line class="tick" x1="69.5" y1="83.7" x2="73" y2="89.8"/>
+        <line class="tick" x1="10.2" y1="27" x2="16.3" y2="30.5"/><line class="tick" x1="83.7" y1="69.5" x2="89.8" y2="73"/>
+        <line class="tick" x1="10.2" y1="73" x2="16.3" y2="69.5"/><line class="tick" x1="83.7" y1="30.5" x2="89.8" y2="27"/>
+        <line class="tick" x1="27" y1="89.8" x2="30.5" y2="83.7"/><line class="tick" x1="69.5" y1="16.3" x2="73" y2="10.2"/>
+      </g>
+      <line class="needle" x1="50" y1="50" x2="67" y2="20.6" stroke-width="1.4"/>
+      <circle cx="50" cy="50" r="2" fill="#B87333"/>
+    </svg>
+    <div class="ed foil">One of five hundred</div>
+  </div>
+</div>
+</body>
+</html>

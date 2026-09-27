@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Instrument — the twelve cards</title>
+<link rel="stylesheet" href="styles/fonts.css">
+<style>
+  /* A6 cards (105 × 148 mm) with 3 mm bleed: page 111 × 154 mm. Two colours: black + cinnabar. Letterpress from photopolymer. */
+  :root { --spot: #B3261E; --spot-30: #E8B9B4; --ink: #000; }
+  @page { size: 111mm 154mm; margin: 0; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "EB Garamond", serif; color: var(--ink); background: #888; }
+  .card { width: 111mm; height: 154mm; background: #fff; position: relative; break-after: page; overflow: hidden; }
+  .in { position: absolute; left: 11mm; top: 11mm; right: 11mm; bottom: 11mm; display: flex; flex-direction: column; }
+  .kicker { font-family: "Instrument Sans", sans-serif; font-weight: 500; font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; }
+  .numeral { font-family: "Instrument Serif", serif; font-size: 96pt; line-height: 0.85; color: var(--spot); margin: 8mm 0 0 -2pt; letter-spacing: -0.02em; }
+  h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 26pt; line-height: 1.02; margin: 7mm 0 0; }
+  .axiom { font-style: italic; font-size: 12pt; line-height: 15pt; margin: 4mm 0 0; }
+  .foot { margin-top: auto; font-family: "Instrument Sans", sans-serif; font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b6b; display: flex; justify-content: space-between; }
+  .back .label { font-family: "Instrument Sans", sans-serif; font-weight: 600; font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--spot); }
+  .back h2 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 20pt; line-height: 1.05; margin: 2mm 0 4mm; padding-bottom: 3mm; border-bottom: 0.5pt solid var(--spot); }
+  .back ol { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+  .back li { position: relative; padding-left: 8mm; margin-bottom: 3.2mm; font-size: 10.5pt; line-height: 13.5pt; counter-increment: s; }
+  .back li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 0.5pt; font-family: "Instrument Sans", sans-serif; font-weight: 600; font-size: 7pt; color: var(--spot); }
+  .back li::after { content: ""; position: absolute; left: 4.4mm; top: 2.6pt; width: 2.2mm; height: 2.2mm; border: 0.45pt solid var(--spot); }
+  .title .numeral { font-size: 20pt; line-height: 1; margin: 0; }
+  .title h1 { font-size: 30pt; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 30mm; }
+  .title .sub { font-family: "Instrument Serif", serif; font-style: italic; font-size: 13pt; margin-top: 3mm; }
+  .title svg { width: 22mm; height: 22mm; margin-top: 8mm; }
+  .rules li { font-size: 10pt; line-height: 13pt; margin-bottom: 2.6mm; }
+  .rules li::after { display: none; }
+  #card-preview { display: none; }
+  @media screen { #card-preview { display: flex; gap: 6mm; padding: 6mm; background: #888; width: max-content; } #card-preview .card { break-after: auto; box-shadow: 0 6mm 14mm rgba(0,0,0,0.35); } }
+</style>
+<script>
+  window.addEventListener('load', async () => {
+    try { await Promise.all(Array.from(document.fonts).map(f => f.load())); await document.fonts.ready; } catch (e) {}
+    // screen-only preview: card I front and back
+    const pv = document.getElementById('card-preview');
+    pv.appendChild(document.getElementById('c1f').cloneNode(true));
+    pv.appendChild(document.getElementById('c1b').cloneNode(true));
+    window.__renderDone = true;
+  });
+</script>
+</head>
+<body>
+
+<div class="card title"><div class="in">
+  <div class="kicker">Twelve cards &middot; one a month</div>
+  <h1>The<br>Instrument</h1>
+  <div class="sub">Twelve tools for a life of your own making</div>
+  <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#000" stroke-width="1.4"/><line x1="50" y1="50" x2="67" y2="20.6" stroke="#B3261E" stroke-width="2"/><circle cx="50" cy="50" r="2.4" fill="#B3261E"/></svg>
+  <div class="foot"><span>Limited edition</span><span>One of five hundred</span></div>
+</div></div>
+<div class="card back"><div class="in">
+  <p class="label">How to use the cards</p>
+  <h2>One a month</h2>
+  <ol class="rules">
+    <li>On the first day of the month, read the chapter. Then take out the month&rsquo;s card.</li>
+    <li>Put it where you will see it without looking for it: the desk, the mirror, the inside of the wallet.</li>
+    <li>The front is the axiom. The back is the practice, in brief. The book has the rest.</li>
+    <li>Tick the boxes as you go. On the last day, return the card to the box and sign the ledger.</li>
+    <li>Keep the cards after the year. The three you kept are the instruments; carry those.</li>
+  </ol>
+  <div class="foot"><span>The Instrument</span><span>Dic-c Editions</span></div>
+</div></div>
+
+<div class="card" id="c1f"><div class="in"><div class="kicker">Instrument one &middot; Direction</div><div class="numeral">I</div><h1>The Eulogy</h1><p class="axiom">Begin at the end.</p><div class="foot"><span>Month one</span><span>I of XII</span></div></div></div>
+<div class="card back" id="c1b"><div class="in"><p class="label">Practice &middot; Month one</p><h2>Write the eulogy</h2><ol><li>Choose the speaker: the person whose good opinion you most want to have deserved.</li><li>Set the scene in one line. The year, the room, who is there.</li><li>Four hundred words in their voice. Not what you achieved: what it was like to know you.</li><li>Read it aloud once. Mark every sentence not yet true.</li><li>Extract three governing lines. They now outrank every goal you have.</li></ol><div class="foot"><span>The Instrument</span><span>I of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument two &middot; Time</div><div class="numeral">II</div><h1>The Weeks</h1><p class="axiom">A life is four thousand weeks. Spend them on purpose.</p><div class="foot"><span>Month two</span><span>II of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month two</p><h2>Fill the chart</h2><ol><li>Colour every week you have lived, in pen.</li><li>Find the line at eighty. Count the rows left; write the number.</li><li>The tail-end sum for three people: times a year, times years left.</li><li>Set the weekly non-negotiable: two hours, same time, twelve weeks in the calendar.</li><li>Cancel one weekly recurrence today.</li></ol><div class="foot"><span>The Instrument</span><span>II of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument three &middot; Thinking</div><div class="numeral">III</div><h1>The Question</h1><p class="axiom">The quality of a life follows the quality of its questions.</p><div class="foot"><span>Month three</span><span>III of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month three</p><h2>Fifty questions</h2><ol><li>Fifty questions about your own life, one sitting, no answering.</li><li>The next day, circle the three that made you uncomfortable.</li><li>For each, write the answer you are pretending not to know.</li><li>Find the eigenquestion: the one whose answer settles the others.</li><li>Carry it for the month. Do not force an answer.</li></ol><div class="foot"><span>The Instrument</span><span>III of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument four &middot; Judgment</div><div class="numeral">IV</div><h1>Inversion</h1><p class="axiom">Avoid stupidity before you attempt brilliance.</p><div class="foot"><span>Month four</span><span>IV of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month four</p><h2>Run the premortem</h2><ol><li>Name the most important thing you are doing this year.</li><li>It is one year from today. It has failed completely.</li><li>Fifteen reasons, specific, in the past tense.</li><li>Circle three; one action this month against each.</li><li>Write the kill criterion and the not-to-do list.</li></ol><div class="foot"><span>The Instrument</span><span>IV of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument five &middot; Risk</div><div class="numeral">V</div><h1>Asymmetry</h1><p class="axiom">Make many small bets whose downside is bounded and whose upside is not.</p><div class="foot"><span>Month five</span><span>V of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month five</p><h2>Sort the bets</h2><ol><li>List every decision you have been putting off.</li><li>Mark each door. Decide every two-way door today.</li><li>One-way doors: what would have to be true, and the cheapest way to find out.</li><li>Ten small bets; place three this month.</li><li>Open the decision ledger: what I expect, and when to check.</li></ol><div class="foot"><span>The Instrument</span><span>V of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument six &middot; Learning</div><div class="numeral">VI</div><h1>The Loop</h1><p class="axiom">You become whatever you get fast feedback on.</p><div class="foot"><span>Month six</span><span>VI of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month six</p><h2>Shorten the loop</h2><ol><li>Name the three skills your governing lines require.</li><li>Measure each loop: how long until you know honestly how it went.</li><li>Take the longest and design it ten times shorter.</li><li>Run it for thirty days. Count the iterations.</li><li>Retrieve, do not re-read: write what the chapter said before opening it.</li></ol><div class="foot"><span>The Instrument</span><span>VI of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument seven &middot; Focus</div><div class="numeral">VII</div><h1>Attention</h1><p class="axiom">Your experience is what you agree to attend to.</p><div class="foot"><span>Month seven</span><span>VII of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month seven</p><h2>The thousand minutes</h2><ol><li>Three days in ten-minute boxes, one word each.</li><li>Colour what you would choose again. Count the rest.</li><li>Sacred hours: two a day, same time, phone in another room.</li><li>Close every session in one line: where I stopped, the next step.</li><li>Remove one input for the month.</li></ol><div class="foot"><span>The Instrument</span><span>VII of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument eight &middot; Patience</div><div class="numeral">VIII</div><h1>Compounding</h1><p class="axiom">Small, repeated, for years, beats large, occasional, for months.</p><div class="foot"><span>Month eight</span><span>VIII of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month eight</p><h2>The ten-year letter</h2><ol><li>Name the one asset that, held ten years, changes everything.</li><li>Write the letter, dated ten years from today, from you to you.</li><li>Set the weekly minimum you could sustain for five hundred and twenty weeks.</li><li>Name what compounds against you. Start reducing it.</li><li>Keep the letter in the book. The envelope will ask.</li></ol><div class="foot"><span>The Instrument</span><span>VIII of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument nine &middot; Creativity</div><div class="numeral">IX</div><h1>Taste</h1><p class="axiom">Quantity is the road to quality.</p><div class="foot"><span>Month nine</span><span>IX of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month nine</p><h2>One hundred ideas</h2><ol><li>One hundred ideas, one sitting, no judging.</li><li>The next day, circle five by asymmetry.</li><li>Make the smallest version of one this week. Show one person.</li><li>Start the commonplace book: one page a day.</li><li>One hour made for every hour consumed.</li></ol><div class="foot"><span>The Instrument</span><span>IX of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument ten &middot; Courage</div><div class="numeral">X</div><h1>The Ask</h1><p class="axiom">Most of the world is a door that opens if you knock.</p><div class="foot"><span>Month ten</span><span>X of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month ten</p><h2>Five asks in seven days</h2><ol><li>List ten asks you have been avoiding.</li><li>Rank by asymmetry. Pick five.</li><li>Ask within seven days. Write the answer, not the fear.</li><li>Write the letter you have been not writing. Send it.</li><li>Collect ten refusals before the month ends.</li></ol><div class="foot"><span>The Instrument</span><span>X of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument eleven &middot; Energy</div><div class="numeral">XI</div><h1>The Body</h1><p class="axiom">The mind is something the body does.</p><div class="foot"><span>Month eleven</span><span>XI of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month eleven</p><h2>Fourteen days of the four</h2><ol><li>Fixed wake time. The alarm is for bed, seven and a half hours before.</li><li>Daylight within an hour of waking. Ten minutes outdoors.</li><li>Thirty minutes of movement a day; three hard sessions a fortnight.</li><li>Five minutes of slow breathing when arousal is high.</li><li>Mark the grid nightly. Day fifteen: what changed?</li></ol><div class="foot"><span>The Instrument</span><span>XI of XII</span></div></div></div>
+
+<div class="card"><div class="in"><div class="kicker">Instrument twelve &middot; Relationships</div><div class="numeral">XII</div><h1>The Others</h1><p class="axiom">Good relationships keep us happier and healthier. Period.</p><div class="foot"><span>Month twelve</span><span>XII of XII</span></div></div></div>
+<div class="card back"><div class="in"><p class="label">Practice &middot; Month twelve</p><h2>The gratitude visit</h2><ol><li>Name the five. Beside each, the date of the last real conversation.</li><li>Three hundred words of gratitude to one of them.</li><li>Deliver it in person, and read it aloud.</li><li>The weekly call: one of the five, thirty minutes, twelve weeks.</li><li>Repair one thing. Have the postponed conversation.</li></ol><div class="foot"><span>The Instrument</span><span>XII of XII</span></div></div></div>
+
+<div id="card-preview"></div>
+</body>
+</html>

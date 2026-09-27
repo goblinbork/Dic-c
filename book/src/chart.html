@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Weeks Chart</title>
+<link rel="stylesheet" href="styles/fonts.css">
+<style>
+  /* A2 portrait, 420 × 594 mm, two colours, map-folded to A5. */
+  :root { --spot: #B3261E; --spot-30: #E8B9B4; --ink: #000; }
+  @page { size: 420mm 594mm; margin: 0; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "EB Garamond", serif; color: var(--ink); background: #888; }
+  .sheet { width: 420mm; height: 594mm; background: #fff; position: relative; overflow: hidden; }
+  .head { position: absolute; left: 24mm; right: 24mm; top: 20mm; height: 40mm; }
+  .head h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 44pt; line-height: 1; margin: 0; letter-spacing: 0.01em; }
+  .head .sub { font-style: italic; font-size: 15pt; margin-top: 3mm; }
+  .head .right { position: absolute; right: 0; top: 2mm; width: 150mm; font-family: "Instrument Sans", sans-serif; font-size: 8pt; line-height: 12pt; letter-spacing: 0.04em; }
+  .head .right b { display: block; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; font-size: 7pt; color: var(--spot); margin-bottom: 1.5mm; }
+  .head .right .f { display: inline-block; border-bottom: 0.35pt solid #000; width: 22mm; margin: 0 2mm; }
+  svg.grid { position: absolute; left: 24mm; top: 66mm; }
+  .foot { position: absolute; left: 24mm; right: 24mm; bottom: 14mm; font-family: "Instrument Sans", sans-serif; font-size: 7pt; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6b6b; display: flex; justify-content: space-between; }
+  @media screen { body { padding: 10mm; } }
+</style>
+<script>
+  function build() {
+    const cols = 52, rows = 90, pitch = 5.6, box = 4.8, left = 14, top = 10; // mm
+    const W = left + cols * pitch + 2, H = top + rows * pitch + 2;
+    let s = `<svg class="grid" xmlns="http://www.w3.org/2000/svg" width="${W}mm" height="${H}mm" viewBox="0 0 ${W} ${H}">`;
+    s += `<style>text{font-family:"Instrument Sans",sans-serif;font-size:2.4px;fill:#6b6b6b;letter-spacing:.08px} .eighty{font-family:"Instrument Serif",serif;font-size:3.6px;fill:#B3261E;letter-spacing:0}</style>`;
+    // week labels along the top
+    for (let c = 0; c < cols; c++) {
+      const w = c + 1;
+      if (w === 1 || w % 4 === 0 || w === 52) s += `<text x="${left + c * pitch + box / 2}" y="${top - 3}" text-anchor="middle">${w}</text>`;
+    }
+    s += `<text x="${left}" y="${top - 6.5}" text-anchor="start" style="font-size:2.4px;letter-spacing:.4px">WEEK OF THE YEAR →</text>`;
+    for (let r = 0; r < rows; r++) {
+      const age = r; // row r = the year from birthday r to r+1
+      if (r % 5 === 0) s += `<text x="${left - 3}" y="${top + r * pitch + box * 0.75}" text-anchor="end">${age}</text>`;
+      for (let c = 0; c < cols; c++) {
+        const x = left + c * pitch, y = top + r * pitch;
+        const light = r >= 80;
+        s += `<rect x="${x}" y="${y}" width="${box}" height="${box}" fill="none" stroke="${light ? '#F2D9D6' : '#E8B9B4'}" stroke-width="0.25"/>`;
+      }
+    }
+    // the line at eighty
+    const y80 = top + 80 * pitch - (pitch - box) / 2;
+    s += `<line x1="${left - 1}" y1="${y80}" x2="${left + cols * pitch}" y2="${y80}" stroke="#B3261E" stroke-width="0.5" stroke-dasharray="1.2 1.2"/>`;
+    s += `<text class="eighty" x="${left + cols * pitch + 1.5}" y="${y80 + 1.2}" text-anchor="start">eighty</text>`;
+    s += `<text x="${left - 3}" y="${top - 6.5}" text-anchor="end" style="letter-spacing:.4px">AGE ↓</text>`;
+    s += `</svg>`;
+    return s;
+  }
+  window.addEventListener('DOMContentLoaded', () => { document.getElementById('gridhost').innerHTML = build(); });
+  window.addEventListener('load', async () => {
+    try { await Promise.all(Array.from(document.fonts).map(f => f.load())); await document.fonts.ready; } catch (e) {}
+    window.__renderDone = true;
+  });
+</script>
+</head>
+<body>
+<div class="sheet" id="chart-preview">
+  <div class="head">
+    <h1>The Weeks Chart</h1>
+    <div class="sub">Four thousand six hundred and eighty boxes. One for every week of a ninety-year life. Colour the ones you have lived.</div>
+    <div class="right">
+      <b>The allocation</b>
+      Weeks lived <span class="f"></span> Weeks to eighty <span class="f"></span><br>
+      Non-negotiable <span class="f" style="width:70mm"></span><br>
+      Filled on <span class="f"></span> by <span class="f" style="width:44mm"></span>
+    </div>
+  </div>
+  <div id="gridhost"></div>
+  <div class="foot"><span>The Instrument &middot; Instrument two</span><span>Each row is one year of fifty-two weeks &middot; The dashed line is eighty</span><span>One of five hundred</span></div>
+</div>
+</body>
+</html>

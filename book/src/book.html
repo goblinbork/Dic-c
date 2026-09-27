@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Instrument</title>
+<link rel="stylesheet" href="styles/fonts.css">
+<link rel="stylesheet" href="styles/book.css">
+<script>
+  // Start Paged.js only after every declared face has loaded, so that line
+  // breaks computed during pagination are the final ones.
+  window.PagedConfig = {
+    before: async () => {
+      try { await Promise.all(Array.from(document.fonts).map(f => f.load())); await document.fonts.ready; } catch (e) { console.error(e); }
+    },
+    after: (flow) => { window.__pageCount = flow ? flow.total : null; window.__renderDone = true; }
+  };
+</script>
+<script src="../node_modules/pagedjs/dist/paged.polyfill.js"></script>
+</head>
+<body>
+<!-- PARTS -->
+</body>
+</html>

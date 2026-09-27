@@ -1,0 +1,21 @@
+{
+  "name": "the-instrument",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Source, design and build pipeline for THE INSTRUMENT — a limited edition book.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:book": "node build.mjs book",
+    "build:extras": "node build.mjs cover cards chart letter",
+    "clean": "rm -rf dist/*.pdf dist/*.png src/_assembled"
+  },
+  "dependencies": {
+    "hyphen": "^1.10.6",
+    "pagedjs": "^0.4.3"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1"
+  },
+  "license": "SEE LICENSE IN ../LICENSE.md"
+}

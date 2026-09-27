@@ -1,0 +1,276 @@
+/* =====================================================================
+   THE INSTRUMENT — interior typography
+   Trim 170 × 240 mm. Text block 118 × 192 mm. Two inks: black + cinnabar.
+   ===================================================================== */
+
+:root {
+  --ink: #000000;          /* black plate */
+  --spot: #B3261E;         /* cinnabar spot plate (≈ Pantone 1805 C) */
+  --spot-30: #E8B9B4;      /* 30 % tint of the spot, for rules and grids */
+  --spot-12: #F6E3E0;      /* 12 % tint */
+  --grey: #6b6b6b;         /* 60 % black, notes */
+  --paper: #ffffff;
+
+  --text: "EB Garamond", "Bitstream Charter", Georgia, serif;
+  --display: "Instrument Serif", "EB Garamond", serif;
+  --sans: "Instrument Sans", "Inter", Helvetica, Arial, sans-serif;
+
+  --body-size: 11pt;
+  --leading: 16pt;
+}
+
+body[data-variant="screen"] { --paper: #FBF8F1; }
+
+/* ---------- page geometry ---------- */
+@page {
+  size: 170mm 240mm;
+  margin: 22mm 30mm 26mm 22mm;
+}
+@page :left  { margin-left: 30mm; margin-right: 22mm; }
+@page :right { margin-left: 22mm; margin-right: 30mm; }
+
+@page :left {
+  @top-left { content: "The Instrument"; }
+  @bottom-left { content: counter(page); }
+}
+@page :right {
+  @top-right { content: string(chapter-name); }
+  @bottom-right { content: counter(page); }
+}
+
+/* front matter: no running heads, roman folios */
+@page front {
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+@page silent {
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+@page opener {
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+
+/* margin-box styling (Paged.js renders margin boxes as flex cells) */
+.pagedjs_margin-content {
+  font-family: var(--sans);
+  font-size: 7.5pt;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.pagedjs_margin-top .pagedjs_margin-content { align-self: flex-end; padding-bottom: 6mm; }
+.pagedjs_margin-bottom .pagedjs_margin-content { align-self: flex-start; padding-top: 8mm; font-variant-numeric: lining-nums tabular-nums; letter-spacing: 0.08em; }
+.pagedjs_blank_page .pagedjs_margin-content { display: none; }
+.pagedjs_page { background: var(--paper); }
+body[data-variant="print"] .pagedjs_page { background: #ffffff; }
+
+/* ---------- base ---------- */
+html { font-size: var(--body-size); }
+body {
+  margin: 0;
+  font-family: var(--text);
+  font-size: var(--body-size);
+  font-weight: 470;
+  line-height: var(--leading);
+  color: var(--ink);
+  font-kerning: normal;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+  text-rendering: optimizeLegibility;
+  hyphens: manual;
+  orphans: 2; widows: 2;
+}
+p { margin: 0; text-align: justify; text-indent: 1.4em; }
+p.first, h2 + p, h3 + p, .opener p, .practice p, .ledger p, p.noindent, blockquote p { text-indent: 0; }
+p + p.space { margin-top: 0.5em; }
+em, i { font-style: italic; }
+strong { font-weight: 640; }
+a { color: inherit; text-decoration: none; }
+hr { border: 0; height: 0; margin: 12pt auto; text-align: center; }
+hr::after { content: "◇"; color: var(--spot); font-size: 7pt; letter-spacing: 1em; }
+sup { font-size: 0.7em; line-height: 0; vertical-align: 0.4em; font-variant-numeric: lining-nums; }
+.sc { font-variant-caps: small-caps; letter-spacing: 0.05em; }
+.num { font-variant-numeric: lining-nums; }
+.spot { color: var(--spot); }
+
+/* ---------- front matter ---------- */
+.front { page: front; }
+.silent { page: silent; }
+.pagebreak { break-before: page; }
+.recto { break-before: right; }
+.verso { break-before: left; }
+
+.half-title { break-before: right; height: 100%; display: flex; align-items: flex-end; }
+.half-title h1 { font-family: var(--display); font-weight: 400; font-size: 24pt; letter-spacing: 0.02em; margin: 0 0 36mm 0; }
+
+.title-page { break-before: right; text-align: center; height: 190mm; display: flex; flex-direction: column; justify-content: space-between; }
+.title-page .mark { margin: 6mm auto 0; width: 34mm; height: 34mm; }
+.title-page h1 { font-family: var(--display); font-weight: 400; font-size: 42pt; line-height: 1; letter-spacing: 0.04em; text-transform: uppercase; margin: 10mm 0 3mm; }
+.title-page .subtitle { font-family: var(--display); font-style: italic; font-size: 16pt; line-height: 1.3; margin: 0 8mm; }
+.title-page .edition { font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.18em; text-transform: uppercase; }
+.title-page .press { font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4mm; }
+
+.copyright { break-before: left; font-family: var(--sans); font-size: 7.5pt; line-height: 11pt; font-weight: 400; display: flex; flex-direction: column; justify-content: flex-end; height: 190mm; }
+.copyright p { text-align: left; text-indent: 0; margin-bottom: 7pt; }
+.copyright .numbering { font-family: var(--text); font-size: 11pt; line-height: 18pt; margin-top: 10pt; }
+.copyright .numbering .line { display: inline-block; width: 22mm; border-bottom: 0.35pt solid var(--ink); }
+
+.dedication { break-before: right; height: 190mm; display: flex; align-items: center; justify-content: center; text-align: center; }
+.dedication p { text-indent: 0; font-style: italic; font-size: 12.5pt; text-align: center; }
+
+.epigraph-page { break-before: left; height: 190mm; display: flex; align-items: center; }
+.epigraph-page blockquote { margin: 0 6mm; }
+blockquote { margin: 0; }
+blockquote p { text-align: left; text-indent: 0; font-size: 12pt; line-height: 17pt; }
+blockquote .who { display: block; margin-top: 8pt; font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.14em; text-transform: uppercase; font-style: normal; }
+
+/* contents */
+.contents { break-before: right; }
+.contents h1, .front h1.plain { font-family: var(--display); font-weight: 400; font-size: 21pt; letter-spacing: 0.02em; margin: 0 0 5pt; }
+.contents .part { font-family: var(--sans); font-size: 7pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--spot); margin: 4pt 0 0; break-after: avoid; }
+.contents ol { list-style: none; margin: 0; padding: 0; }
+.contents li { display: grid; grid-template-columns: 10mm 1fr auto; column-gap: 3mm; align-items: baseline; padding: 0.5pt 0 1pt; border-bottom: 0.3pt solid var(--spot-30); break-inside: avoid; }
+.contents li .n { font-family: var(--display); font-size: 12pt; color: var(--spot); }
+.contents li .t { font-size: 10.5pt; line-height: 12.5pt; }
+.contents li .t small { display: block; font-style: italic; font-size: 8.25pt; line-height: 10.5pt; color: var(--grey); }
+.contents li .pg { font-family: var(--sans); font-size: 8pt; font-variant-numeric: lining-nums tabular-nums; }
+.contents li .pg::after { content: target-counter(attr(href url), page); }
+.contents li.plain { grid-template-columns: 1fr auto; }
+
+/* the set */
+.theset { break-before: right; }
+.theset h1 { font-family: var(--display); font-weight: 400; font-size: 22pt; margin: 0 0 10pt; }
+.theset p.lead { text-indent: 0; text-align: left; margin-bottom: 10pt; }
+.theset ol { list-style: none; margin: 0; padding: 0; counter-reset: item; }
+.theset li { position: relative; padding: 7pt 0 7pt 12mm; border-top: 0.3pt solid var(--spot-30); counter-increment: item; break-inside: avoid; }
+.theset li::before { content: counter(item); position: absolute; left: 0; top: 7pt; font-family: var(--display); font-size: 15pt; line-height: 15pt; color: var(--spot); }
+.theset li b { display: block; font-family: var(--sans); font-weight: 600; font-size: 7.5pt; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 2pt; }
+.theset li p { text-indent: 0; text-align: left; font-size: 10.5pt; line-height: 14.5pt; }
+
+/* how to use */
+.howto h1 { font-family: var(--display); font-weight: 400; font-size: 22pt; margin: 0 0 12pt; }
+.howto h2 { font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--spot); margin: 14pt 0 4pt; }
+.howto ol.rules { margin: 6pt 0 0; padding: 0 0 0 0; list-style: none; counter-reset: rule; }
+.howto ol.rules li { position: relative; padding-left: 9mm; margin-bottom: 7pt; text-align: justify; counter-increment: rule; }
+.howto ol.rules li::before { content: counter(rule); position: absolute; left: 0; top: 0; font-family: var(--display); font-size: 15pt; line-height: 16pt; color: var(--spot); }
+
+/* ---------- chapters ---------- */
+.chapter { break-before: left; }   /* opener on a verso, facing the first page of the essay */
+/* Paged.js keeps one selector per string name, so every running-head source lives in this single rule. */
+.chapter h1, .plainpage h1 { string-set: chapter-name content(text); }
+
+.opener { page: opener; height: 192mm; display: flex; flex-direction: column; position: relative; }
+.opener .kicker { font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); margin-top: 2mm; }
+.opener .numeral { font-family: var(--display); font-size: 170pt; line-height: 0.86; color: var(--spot); margin: 14mm 0 0 -4pt; letter-spacing: -0.02em; }
+.opener h1 { font-family: var(--display); font-weight: 400; font-size: 40pt; line-height: 1.02; margin: 10mm 0 0; letter-spacing: -0.005em; }
+.opener .axiom { font-family: var(--text); font-style: italic; font-size: 15.5pt; line-height: 21pt; margin: 8mm 0 0; max-width: 92mm; text-align: left; }
+.opener .epi { margin-top: auto; padding-top: 8mm; font-family: var(--text); font-style: italic; font-size: 10.5pt; line-height: 14pt; text-align: left; text-indent: 0; max-width: 96mm; }
+.opener .epi .who { display: block; margin-top: 3pt; font-family: var(--sans); font-style: normal; font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey); }
+.opener .foot { margin-top: 6mm; font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey); }
+
+.essay { break-before: page; }
+.essay > p:first-of-type::first-line { font-variant-caps: small-caps; letter-spacing: 0.06em; }
+.essay > p:first-of-type { text-indent: 0; }
+.essay h2 { font-family: var(--sans); font-size: 7.5pt; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--spot); margin: 15pt 0 5pt; break-after: avoid; }
+.essay h2::before { content: ""; display: inline-block; width: 5mm; border-top: 0.6pt solid var(--spot); vertical-align: middle; margin-right: 2.5mm; }
+.essay .pull { font-family: var(--display); font-size: 17pt; line-height: 22pt; text-indent: 0; text-align: left; margin: 12pt 0 12pt 0; padding-left: 5mm; border-left: 1.1pt solid var(--spot); break-inside: avoid; }
+.essay .aside { font-size: 9.5pt; line-height: 13pt; color: var(--ink); margin: 8pt 0 8pt; padding: 0 0 0 5mm; border-left: 0.35pt solid var(--spot-30); text-indent: 0; text-align: left; }
+.essay table { width: 100%; border-collapse: collapse; margin: 8pt 0 10pt; font-family: var(--sans); font-size: 8.5pt; line-height: 12pt; font-variant-numeric: lining-nums tabular-nums; break-inside: avoid; }
+.essay th { text-align: left; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-size: 7pt; color: var(--spot); border-bottom: 0.6pt solid var(--spot); padding: 3pt 4pt 3pt 0; }
+.essay td { padding: 3.5pt 4pt 3.5pt 0; border-bottom: 0.3pt solid var(--spot-30); vertical-align: top; }
+.essay td.r, .essay th.r { text-align: right; padding-right: 0; }
+.essay ul { margin: 4pt 0 8pt; padding-left: 5mm; }
+.essay li { margin-bottom: 3pt; }
+.essay ol { margin: 4pt 0 8pt; padding-left: 5mm; }
+.essay .note { font-size: 9.5pt; line-height: 13pt; }
+
+/* ---------- practice page ---------- */
+.practice { break-before: left; page: practice; }   /* practice on the verso, ledger on the facing recto */
+.practice .label { font-family: var(--sans); font-size: 7.5pt; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--spot); margin: 0 0 4pt; }
+.practice h2 { font-family: var(--display); font-weight: 400; font-size: 24pt; line-height: 1.05; margin: 0 0 6pt; }
+.practice .time { font-family: var(--sans); font-size: 8pt; letter-spacing: 0.06em; color: var(--grey); margin: 0 0 12pt; padding-bottom: 8pt; border-bottom: 0.6pt solid var(--spot); text-indent: 0; text-align: left; }
+.practice ol.steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+.practice ol.steps li { position: relative; padding-left: 10mm; margin: 0 0 9.5pt; counter-increment: step; text-align: justify; font-size: 11pt; line-height: 16pt; }
+.practice ol.steps li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 1pt; font-family: var(--sans); font-size: 8pt; font-weight: 600; letter-spacing: 0.06em; color: var(--spot); font-variant-numeric: lining-nums; }
+.practice ol.steps li::after { content: ""; position: absolute; left: 5.2mm; top: 3.5pt; width: 2.8mm; height: 2.8mm; border: 0.5pt solid var(--spot); }
+.practice ol.steps li strong { font-weight: 640; }
+.practice .why { margin-top: 12pt; padding-top: 8pt; border-top: 0.3pt solid var(--spot-30); font-size: 9.75pt; line-height: 13.5pt; text-indent: 0; text-align: left; }
+.practice .fails { margin-top: 6pt; font-size: 9.75pt; line-height: 13.5pt; text-indent: 0; text-align: left; }
+.practice .fails b, .practice .why b { font-family: var(--sans); font-weight: 600; font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--spot); margin-right: 2mm; }
+
+/* ---------- ledger page (for writing) ---------- */
+.ledger { break-before: page; page: ledger; }
+.ledger .label { font-family: var(--sans); font-size: 7.5pt; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--spot); margin: 0 0 4pt; }
+.ledger h2 { font-family: var(--display); font-weight: 400; font-size: 24pt; line-height: 1.05; margin: 0 0 4pt; }
+.ledger .date { font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin: 0 0 10pt; text-indent: 0; text-align: left; }
+.ledger .date span { display: inline-block; width: 30mm; border-bottom: 0.35pt solid var(--ink); margin-left: 2mm; }
+.ledger .field { margin: 0 0 8pt; break-inside: avoid; }
+.ledger .field .q { font-family: var(--text); font-style: italic; font-size: 10.5pt; line-height: 14pt; text-indent: 0; text-align: left; margin: 0 0 2pt; }
+.ledger .lines { background-image: linear-gradient(to top, var(--spot-30) 0.3mm, transparent 0.3mm); background-size: 100% 7.7mm; background-repeat: repeat-y; }
+.ledger .lines.l3 { height: 23.1mm; } .ledger .lines.l4 { height: 30.8mm; } .ledger .lines.l5 { height: 38.5mm; } .ledger .lines.l6 { height: 46.2mm; } .ledger .lines.l8 { height: 61.6mm; } .ledger .lines.l10 { height: 77mm; }
+.ledger .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+.ledger .box { border: 0.35pt solid var(--spot-30); height: 30mm; padding: 2mm; font-family: var(--sans); font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); }
+.ledger .signoff { margin-top: 10pt; font-family: var(--sans); font-size: 7.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); display: flex; justify-content: space-between; gap: 6mm; }
+.ledger .signoff span { flex: 1; border-top: 0.35pt solid var(--ink); padding-top: 2pt; }
+.ledger .grid8 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1.6mm; margin: 2pt 0 6pt; }
+.ledger .grid8 div { border: 0.35pt solid var(--spot-30); height: 8mm; font-family: var(--sans); font-size: 6pt; color: var(--grey); padding: 1pt 2pt; }
+
+/* ---------- coda, sources, colophon ---------- */
+.plainpage { break-before: right; }
+.plainpage h1 { font-family: var(--display); font-weight: 400; font-size: 22pt; margin: 0 0 12pt; }
+.plainpage h2 { font-family: var(--sans); font-size: 7.5pt; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--spot); margin: 14pt 0 4pt; break-after: avoid; }
+.sources p { text-align: left; text-indent: 0; font-size: 9pt; line-height: 12.5pt; margin-bottom: 4pt; }
+.sources p b { font-weight: 640; }
+
+.axioms { break-before: page; page: silent; height: 192mm; display: flex; flex-direction: column; }
+.axioms h1 { font-family: var(--display); font-weight: 400; font-size: 22pt; margin: 0 0 6mm; text-align: center; }
+.axioms ol { list-style: none; margin: 0; padding: 0; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.axioms li { display: grid; grid-template-columns: 12mm 1fr; align-items: baseline; }
+.axioms li .n { font-family: var(--display); font-size: 13pt; color: var(--spot); }
+.axioms li .t { font-family: var(--text); font-style: italic; font-size: 12pt; line-height: 15pt; }
+.axioms li .t b { font-style: normal; font-weight: 500; font-variant-caps: small-caps; letter-spacing: 0.06em; margin-right: 1.5mm; }
+
+.colophon { break-before: left; page: silent; font-family: var(--sans); font-size: 8pt; line-height: 12pt; font-weight: 400; height: 192mm; display: flex; flex-direction: column; justify-content: flex-end; }
+.colophon h1 { font-family: var(--display); font-weight: 400; font-size: 16pt; margin: 0 0 8pt; }
+.colophon p { text-align: left; text-indent: 0; margin-bottom: 6pt; }
+.colophon .owners { margin-top: 12pt; font-family: var(--text); font-size: 10pt; }
+.colophon .owners div { border-bottom: 0.35pt solid var(--ink); height: 8mm; margin-bottom: 2mm; display: flex; align-items: flex-end; font-family: var(--sans); font-size: 6.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); padding-bottom: 1pt; }
+
+.plainpage.vowtext { break-before: left; }
+/* the vow page */
+.vow { break-before: right; page: silent; height: 192mm; display: flex; flex-direction: column; }
+.vow .label { font-family: var(--sans); font-size: 7.5pt; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--spot); margin: 0 0 4pt; }
+.vow h1 { font-family: var(--display); font-weight: 400; font-size: 30pt; margin: 0 0 8pt; }
+.vow p.lead { font-size: 11pt; text-indent: 0; text-align: left; margin: 0 0 10pt; }
+.vow .template { font-family: var(--text); font-size: 13.5pt; line-height: 26pt; margin-top: 4mm; }
+.vow .template span.blank { display: inline-block; min-width: 40mm; border-bottom: 0.35pt solid var(--ink); }
+.vow .template span.blank.long { min-width: 100mm; }
+.vow .quarters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6mm; margin-top: 3mm; }
+.vow .quarters div { border-bottom: 0.35pt solid var(--ink); height: 11mm; position: relative; }
+.vow .quarters span { position: absolute; left: 0; top: 0; font-family: var(--sans); font-size: 6.5pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); }
+.vow .sig { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8mm; font-family: var(--sans); font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); }
+.vow .sig span { border-top: 0.35pt solid var(--ink); padding-top: 3pt; }
+
+.ledger table { width: 100%; border-collapse: collapse; margin: 2pt 0 8pt; font-family: var(--sans); font-size: 7pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey); }
+.ledger th { text-align: left; font-weight: 500; padding: 0 3pt 2pt 0; border-bottom: 0.5pt solid var(--spot); }
+.ledger td { height: 8mm; border-bottom: 0.3pt solid var(--spot-30); }
+.ledger .grid100 { display: grid; grid-template-columns: repeat(10, 1fr); gap: 1mm; margin: 2pt 0 6pt; }
+.ledger .grid100 div { border: 0.35pt solid var(--spot-30); height: 6.2mm; }
+.ledger .grid14 { display: grid; grid-template-columns: 22mm repeat(14, 1fr); gap: 1mm; margin: 2pt 0 6pt; align-items: stretch; }
+.ledger .grid14 div { border: 0.35pt solid var(--spot-30); height: 7mm; }
+.ledger .grid14 div.lbl { border: 0; font-family: var(--sans); font-size: 6.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); display: flex; align-items: center; }
+
+/* notes pages */
+.notespage { break-before: page; page: silent; height: 192mm; display: flex; flex-direction: column; }
+.notespage .label { font-family: var(--sans); font-size: 7.5pt; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--spot); margin: 0 0 6pt; }
+.notespage .lines { flex: 1; background-image: linear-gradient(to top, var(--spot-30) 0.3mm, transparent 0.3mm); background-size: 100% 7.7mm; background-repeat: repeat-y; }
+
+/* small utilities */
+.tight { letter-spacing: -0.01em; }
+.center { text-align: center; text-indent: 0; }
+.mt { margin-top: 8pt; }
+.contents ol.mt { margin-top: 4pt; }
+.nohyph { hyphens: none; }

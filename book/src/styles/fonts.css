@@ -1,0 +1,10 @@
+/* Typefaces (all SIL Open Font License, see src/fonts/OFL-*.txt)
+   Text     : EB Garamond (Georg Duffner / Octavio Pardo), variable 400–800
+   Display  : Instrument Serif (Rodrigo Fuenzalida / Jordan Egstad)
+   Working  : Instrument Sans (Rodrigo Fuenzalida / Jordan Egstad), variable 400–700 */
+@font-face { font-family: "EB Garamond"; src: url("../fonts/EBGaramond-VF.ttf") format("truetype"); font-weight: 400 800; font-style: normal; }
+@font-face { font-family: "EB Garamond"; src: url("../fonts/EBGaramond-Italic-VF.ttf") format("truetype"); font-weight: 400 800; font-style: italic; }
+@font-face { font-family: "Instrument Serif"; src: url("../fonts/InstrumentSerif-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Instrument Serif"; src: url("../fonts/InstrumentSerif-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Instrument Sans"; src: url("../fonts/InstrumentSans-VF.ttf") format("truetype"); font-weight: 400 700; font-stretch: 75% 100%; font-style: normal; }
+@font-face { font-family: "Instrument Sans"; src: url("../fonts/InstrumentSans-Italic-VF.ttf") format("truetype"); font-weight: 400 700; font-stretch: 75% 100%; font-style: italic; }
